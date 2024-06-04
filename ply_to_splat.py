@@ -59,7 +59,8 @@ def convert_ply_to_splat(input_ply_filename: str, output_splat_filename: str) ->
             rgb = sh2rgb(sh)
             for color in rgb:
                 splat_file.write(color.astype(np.uint8).tobytes())
-                
+
+            # Opacity
             opac = 1.0 + np.exp(-plydata_row['opacity'])
             opacity = np.clip((1/opac) * 255, 0, 255)
             splat_file.write(opacity.astype(np.uint8).tobytes())
